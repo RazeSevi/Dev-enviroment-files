@@ -1,8 +1,30 @@
-if ! command -v lolcat &> /dev/null; then
-  neofetch
-else
-  neofetch | lolcat
-fi
+# Setting locale environment variables
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+cols=$(tput cols)
+
+clear
+#if [ "$cols" -lt 92 ]; then
+    figlet "Welcome Mr." && figlet "De Beule"
+    #fortune | cowsay|lolcat
+#else
+#    bash /opt/welcomMessage/print.sh
+#    fortune | cowsay -f ghostbusters|lolcat
+#fi
+#if ! command -v lolcat &> /dev/null; then
+#  neofetch
+#else
+#  neofetch | lolcat
+#fi
+
+#if command -v figlet &> /dev/null; then
+#    figlet 'Welcome MR.' && figlet 'DE BEULE'
+#else
+#    echo "Welcome MR. DE BEULE"
+#fi
+
+yabai  --start-service
 #neofetch
 #clear
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -16,9 +38,20 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 #JAVA
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home
-export JAVA_HOME
-export PATH=$PATH:$JAVA_HOME/bin
+#
+
+#export PATH="$HOME/.jenv/bin:$PATH"
+#eval "$(jenv init -)"
+#export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+#export PATH="$JAVA_HOME/bin:$PATH"
+#JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
+#JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home"
+#JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home
+#export JAVA_HOME
+#export PATH=$PATH:$JAVA_HOME/bin
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH="$JAVA_HOME/bin:$PATH"
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -26,103 +59,71 @@ export PATH="$PATH:/Users/chris/flutter/bin"
 export PATH="$PATH:/Users/chris/Documents/projects/private/development/flutter/bin"
 export LS_COLORS="$LS_COLORS:di=1;36:ln=4;93:ex=38;5;172:*.desktop=4;34:*.md=4;95:*.tar.gz=0;37:*.py=0;33:*.pdf=38;5;141:*.lua=0;94:*.sh=0;32;:*.txt=38;5;253:*.cfg=38;5;184:fi=0;37:"
 export GROOVY_HOME="/opt/homebrew/opt/groovy/libexec"
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-#Logs
-#GITSTATUS_LOG_LEVEL=DEBUG
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 
 source $ZSH/oh-my-zsh.sh
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+function findDemoDir() {
+    if [[ "$1" == '-h' || "$1" == '--help' ]]; then
+        echo "Usage:"
+        echo "go_to_dir <company name or dir name>" 
+        return
+    fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+    # Check for empty input
+    if [[ -z "$1" ]]; then
+        echo "Error: No directory name provided."
+        echo "Usage: go_to_dir <company name or dir name>"  
+        return  # Exit the function early if no argument is provided
+    fi
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+    local dirs=()
+    while IFS= read -r line; do
+        dirs+=("$line")
+    done < <(bash /Users/chris/Documents/projects/Exalate/Clients/findDemoDir_v2.sh "$1")
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+    local count=${#dirs[@]}
+    
+    echo "Directories found: $count"
+    #printf '%s\n' "${dirs[@]}"
+    
+    if [ "$count" -eq 1 ]; then
+        local dir="${dirs[@]}"
+        echo "Attempting to change to directory: $dir"
+        if [[ -d "$dir" ]]; then
+            cd "$dir"
+            echo "Changed to directory: $dir"
+        else
+            echo "Directory does not exist: $dir"
+        fi
+    elif [ "$count" -gt 1 ]; then
+        echo "Multiple directories found:"
+        dirs+=("Quit")  # Add Quit as the last option
+        select dir in "${dirs[@]}"; do
+            if [[ "$dir" == "Quit" ]]; then
+                echo "Exiting selection."
+                break
+            elif [[ -d "$dir" ]]; then
+                cd "$dir"
+                echo "Changed to directory: $dir."
+                break
+            else
+                echo "Invalid choice or directory does not exist: $dir"
+                continue
+            fi
+        done
+    else
+        echo "No valid directory found."
+    fi
+}
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-#
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
 # Example aliases
 alias code="code-insiders"
-#alias open="code-insiders"
+alias cr="cursor"
 alias gates="bash ~/startGates.sh"
 alias search="google"
 alias vim="nvim"
@@ -144,3 +145,6 @@ alias lsd="ls -lh --time-style=+%D | grep $(date +%D)"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# Created by `pipx` on 2024-06-25 21:22:58
+export PATH="$PATH:/Users/chris/.local/bin"
